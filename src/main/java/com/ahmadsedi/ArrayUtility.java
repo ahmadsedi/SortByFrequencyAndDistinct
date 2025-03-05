@@ -10,10 +10,17 @@ import java.util.Arrays;
 
 public class ArrayUtility {
 
-    public static String[] sortByFrequencyAndDistinct(String[] array){
-        return Arrays.stream(array).map(Element::new).map(e -> Arrays.stream(array).filter(s->e.getStr().equals(s)).map(Element::new).reduce(Element::reduce).get()).sorted().map(Element::getStr).distinct().toArray(String[]::new);
+    /**
+     * @param input is an unordered array of Strings.
+     * @return a distinct version of input which is sorted by frequency.
+     */
+    public static String[] sortByFrequencyAndDistinct(String[] input){
+        return Arrays.stream(input).map(Element::new).map(e -> Arrays.stream(input).filter(s->e.getStr().equals(s)).map(Element::new).reduce(Element::reduce).get()).sorted().map(Element::getStr).distinct().toArray(String[]::new);
     }
 
+    /**
+     * {@code Element} class is an immutable class which represents each element of the array with its frequency.
+     */
     static class Element implements Comparable<Element>{
         private String str;
         private int number;
