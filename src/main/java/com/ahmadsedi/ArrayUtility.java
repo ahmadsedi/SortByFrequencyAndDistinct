@@ -11,6 +11,22 @@ import java.util.Arrays;
 public class ArrayUtility {
 
     /**
+     * This implementation uses pure Stream API capability to group by and sort elements.
+     *
+     * @param array
+     * @return
+     */
+    public static String[] sortByFrequencyAndDistinctPureStreamAPI(String[] array){
+        return Arrays.stream(array).
+                collect(Collectors.groupingBy(Function.identity(), Collectors.counting())).
+                entrySet().
+                stream().
+                sorted(Map.Entry.comparingByValue()).
+                map(e->e.getKey()).
+                collect(Collectors.toList()).toArray(new String[0]);
+    }
+
+    /**
      * @param input is an unordered array of Strings.
      * @return a distinct version of input which is sorted by frequency.
      */
